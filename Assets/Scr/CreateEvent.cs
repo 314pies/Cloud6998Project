@@ -28,6 +28,8 @@ public class CreateEvent : MonoBehaviour
                 Debug.Log(response);
                 string body = await response.Content.ReadAsStringAsync();
                 Debug.Log(body);
+
+                PopupManager.OpenPopup("API result", body);
             }
         }
     }
