@@ -24,7 +24,7 @@ public class EventDetails : MonoBehaviour
             //var reqPar = "numPeople=3&time=2021_4_9_12_15_30&restaurantId="+SelectedRestaurentID;
             var reqPar = "eid=2021-04-05_10:28:33.666930" + "&userId=uid1";
             using (var request = new HttpRequestMessage(new HttpMethod("POST"),
-                "https://333f7sxvgg.execute-api.us-west-2.amazonaws.com/v1/join?" + reqPar))
+                "https://333f7sxvgg.execute-api.us-west-2.amazonaws.com/v1/drop?" + reqPar))
             {
                 var response = await httpClient.SendAsync(request);
                 Debug.Log(response);
@@ -46,7 +46,7 @@ public class EventDetails : MonoBehaviour
             //var reqPar = "numPeople=3&time=2021_4_9_12_15_30&restaurantId="+SelectedRestaurentID;
             var reqPar = "eid=2021-04-05_10:28:33.666930" + "&userId=uid1";
             using (var request = new HttpRequestMessage(new HttpMethod("POST"),
-                "https://333f7sxvgg.execute-api.us-west-2.amazonaws.com/v1/drop?" + reqPar))
+                "https://333f7sxvgg.execute-api.us-west-2.amazonaws.com/v1/join?" + reqPar))
             {
                 var response = await httpClient.SendAsync(request);
                 Debug.Log(response);
