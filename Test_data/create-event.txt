@@ -1,0 +1,40 @@
+{
+  "body-json": {},
+  "params": {
+    "path": {},
+    "querystring": {
+      "numPeople": "20",
+      "restaurantId": "rid1",
+      "time": "2021_4_12_18_30_30",
+      "userId": "uid1"
+    },
+    "header": {
+      "Host": "333f7sxvgg.execute-api.us-west-2.amazonaws.com",
+      "X-Amzn-Trace-Id": "Root=1-6074fada-7403e7775f8ac8ef6ce5b6ac",
+      "X-Forwarded-For": "108.53.202.22",
+      "X-Forwarded-Port": "443",
+      "X-Forwarded-Proto": "https"
+    }
+  },
+  "stage-variables": {},
+  "context": {
+    "account-id": "",
+    "api-id": "333f7sxvgg",
+    "api-key": "",
+    "authorizer-principal-id": "",
+    "caller": "",
+    "cognito-authentication-provider": "",
+    "cognito-authentication-type": "",
+    "cognito-identity-id": "",
+    "cognito-identity-pool-id": "",
+    "http-method": "POST",
+    "stage": "v1",
+    "source-ip": "108.53.202.22",
+    "user": "",
+    "user-agent": "",
+    "user-arn": "",
+    "request-id": "e56db036-a89c-431d-a079-e337f4c5838f",
+    "resource-id": "yy37gh",
+    "resource-path": "/create"
+  }
+}
