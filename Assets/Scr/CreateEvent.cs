@@ -4,18 +4,47 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Net.Http;
+using Michsky.UI.ModernUIPack;
 
 public class CreateEvent : MonoBehaviour
 {
     [SerializeField]
-    TMP_InputField WhenInput, HowManyInput, RestaurentAddressInput;
+    TMP_InputField WhenInput, HowManyInput;
+    [SerializeField]
 
+    [System.Obsolete]
+    TMP_InputField RestaurentAddressInput;
+
+    [SerializeField]
+    CustomDropdown RestaurentSelector;
+
+    Dictionary<int, string> UISelectedItemIDToRestaurentID = new Dictionary<int, string>() {
+        { 0,"rd1"},
+        { 1,"rid2"}
+    };
+
+    public string SelectedRestaurentID
+    {
+        get
+        {
+            if (UISelectedItemIDToRestaurentID.ContainsKey(RestaurentSelector.selectedItemIndex))
+                return UISelectedItemIDToRestaurentID[RestaurentSelector.selectedItemIndex];
+            
+            Debug.LogError("CreateEvent.SelectedRestaurentID() selectedItemIndex not found");
+            return "rd1";
+        }
+    }
+
+    public void OnDropdownSelected(int itemID)
+    {
+        Debug.Log(RestaurentSelector.selectedItemIndex);
+    }
 
     public async void OnCreateButtonClicked()
     {
         Debug.Log(WhenInput.text);
         Debug.Log(HowManyInput.text);
-        Debug.Log(RestaurentAddressInput.text);
+        Debug.Log(SelectedRestaurentID);
 
         using (var httpClient = new HttpClient())
         {
