@@ -19,7 +19,7 @@ public class CreateEvent : MonoBehaviour
     CustomDropdown RestaurentSelector;
 
     Dictionary<int, string> UISelectedItemIDToRestaurentID = new Dictionary<int, string>() {
-        { 0,"rd1"},
+        { 0,"rid1"},
         { 1,"rid2"}
     };
 
@@ -29,9 +29,9 @@ public class CreateEvent : MonoBehaviour
         {
             if (UISelectedItemIDToRestaurentID.ContainsKey(RestaurentSelector.selectedItemIndex))
                 return UISelectedItemIDToRestaurentID[RestaurentSelector.selectedItemIndex];
-            
+
             Debug.LogError("CreateEvent.SelectedRestaurentID() selectedItemIndex not found");
-            return "rd1";
+            return "rid1";
         }
     }
 
@@ -48,10 +48,10 @@ public class CreateEvent : MonoBehaviour
 
         using (var httpClient = new HttpClient())
         {
-            var reqPar = "numPeople=3&time=2021_4_9_12_15_30&restaurantId=12345";
-
+            //var reqPar = "numPeople=3&time=2021_4_9_12_15_30&restaurantId="+SelectedRestaurentID;
+            var reqPar = "numPeople=" + HowManyInput.text + "&time=" + WhenInput.text + "&restaurantId=" + SelectedRestaurentID + "&userId=uid1";
             using (var request = new HttpRequestMessage(new HttpMethod("POST"),
-                "https://uzeqgezy5e.execute-api.us-west-2.amazonaws.com/v1/test1?" + reqPar))
+                "https://333f7sxvgg.execute-api.us-west-2.amazonaws.com/v1/create?" + reqPar))
             {
                 var response = await httpClient.SendAsync(request);
                 Debug.Log(response);
