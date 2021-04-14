@@ -5,32 +5,55 @@ using UnityEngine.UI;
 using TMPro;
 using System.Net.Http;
 using Michsky.UI.ModernUIPack;
-
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 
 public class EventDetails : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start(eid)
+
+    public string eventId = "2021-04-11_16:29:59.389352";
+
+
+    public TMP_Text PeopleJoinText, TimeText;
+    public void SetEventID(string eventId)
     {
-        var reqPar = "eid=" + eid;
-        using (var request = new HttpRequestMessage(new HttpMethod("GET"),
-            "https://333f7sxvgg.execute-api.us-west-2.amazonaws.com/v1/detail?" + reqPar))
+        this.eventId = eventId;
+    }
+
+    // Start is called before the first frame update
+    public async void OnEnable()
+    {
+        var reqPar = "q=" + eventId;
+
+        using (var httpClient = new HttpClient())
         {
-            var response = await httpClient.SendAsync(request);
-            Debug.Log(response);
-            string body = await response.Content.ReadAsStringAsync();
-            Debug.Log(body);
+            using (var request = new HttpRequestMessage(new HttpMethod("GET"),
+            "https://333f7sxvgg.execute-api.us-west-2.amazonaws.com/v1/detail?" + reqPar))
+            {
+                var response = await httpClient.SendAsync(request);
+                Debug.Log(response);
+                string body = await response.Content.ReadAsStringAsync();
+                Debug.Log(body);                
+                try
+                {
+                    var stuff = (JObject)JsonConvert.DeserializeObject(body);
+                    string eventId = (string)stuff["eventIds"][0]["eventId"];
+                    string userId = (string)stuff["eventIds"][0]["userId"];
+                    string restaurantId = (string)stuff["eventIds"][0]["restaurantId"];
+                    string time = (string)stuff["eventIds"][0]["time"];
+                    string numPeople = (string)stuff["eventIds"][0]["numPeople"];
+                    string userName = (string)stuff["eventIds"][0]["userName"];
+                    string gender = (string)stuff["eventIds"][0]["gender"];
 
-            var stuff = (JObject)JsonConvert.DeserializeObject(body);
-            Debug.Log(stuff["eventIds"][0]["userId"]);
-
-            string eventId = stuff["eventIds"][0]["eventId"];
-            string userId = stuff["eventIds"][0]["userId"];
-            string restaurantId = stuff["eventIds"][0]["restaurantId"];
-            string time = stuff["eventIds"][0]["time"];
-            string numPeople = stuff["eventIds"][0]["numPeople"];
-            string userName = stuff["eventIds"][0]["userName"];
-            string gender = stuff["eventIds"][0]["gender"];
+                    PeopleJoinText.text = numPeople + "people joined";
+                    TimeText.text = time;
+                }
+                catch (Exception exp)
+                {
+                    Debug.Log(exp);
+                }
+            }
         }
     }
 
