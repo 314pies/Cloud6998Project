@@ -25,7 +25,7 @@ public class EventDetails : MonoBehaviour
     public async void OnEnable()
     {
         var reqPar = "q=" + eventId;
-
+        Debug.Log(reqPar);
         using (var httpClient = new HttpClient())
         {
             using (var request = new HttpRequestMessage(new HttpMethod("GET"),
@@ -46,7 +46,7 @@ public class EventDetails : MonoBehaviour
                     string userName = (string)stuff["eventIds"][0]["userName"];
                     string gender = (string)stuff["eventIds"][0]["gender"];
 
-                    PeopleJoinText.text = numPeople + "people joined";
+                    PeopleJoinText.text = numPeople + " people joined";
                     TimeText.text = time;
                 }
                 catch (Exception exp)

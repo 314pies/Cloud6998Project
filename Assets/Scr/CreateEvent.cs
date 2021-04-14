@@ -5,6 +5,8 @@ using UnityEngine.UI;
 using TMPro;
 using System.Net.Http;
 using Michsky.UI.ModernUIPack;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 public class CreateEvent : MonoBehaviour
 {
@@ -40,6 +42,7 @@ public class CreateEvent : MonoBehaviour
         Debug.Log(RestaurentSelector.selectedItemIndex);
     }
 
+    public EventDetails eventDetails;
     public async void OnCreateButtonClicked()
     {
         Debug.Log(WhenInput.text);
@@ -58,7 +61,20 @@ public class CreateEvent : MonoBehaviour
                 string body = await response.Content.ReadAsStringAsync();
                 Debug.Log(body);
 
-                PopupManager.OpenPopup("API result", body);
+               
+                var stuff = (JObject)JsonConvert.DeserializeObject(body);
+                if ((string)stuff["statusCode"] == "200")
+                {
+                    string evendID = (string)stuff["body"];
+                    Debug.Log("Create Success, eventID: " + evendID);
+                    eventDetails.SetEventID(evendID);
+                    eventDetails.gameObject.SetActive(true);
+                    this.gameObject.SetActive(false);
+                }
+                else
+                {
+                    PopupManager.OpenPopup("Sth Go Wrong", body);
+                }
             }
         }
     }
