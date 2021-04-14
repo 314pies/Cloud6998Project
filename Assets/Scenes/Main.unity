@@ -12707,7 +12707,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1547591746
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12749,7 +12749,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d0d163851fb1534a8be2db1422e55c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventId: 2021-04-14 02:21:09.060140
+  eventId: 2021-04-11_16:29:59.389352
   PeopleJoinText: {fileID: 1112862239}
   TimeText: {fileID: 1874566988}
 --- !u!1 &1549329872
@@ -15190,7 +15190,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1865667208}
   m_HandleRect: {fileID: 1865667207}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
