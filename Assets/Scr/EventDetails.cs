@@ -12,8 +12,9 @@ public class EventDetails : MonoBehaviour
     // Start is called before the first frame update
     void Start(eid)
     {
-        eid = eid.Replace(" ", "_");
-        var reqPar = "q=" + eid;
+        eid = eid.Replace(" ", "_"); 
+        var reqPar = "q=" + eid;  // q=2021-04-11_16:29:59.389352
+
         using (var request = new HttpRequestMessage(new HttpMethod("GET"),
             "https://333f7sxvgg.execute-api.us-west-2.amazonaws.com/v1/detail?" + reqPar))
         {
