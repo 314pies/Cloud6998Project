@@ -34,7 +34,7 @@ public class EventDetails : MonoBehaviour
                 var response = await httpClient.SendAsync(request);
                 Debug.Log(response);
                 string body = await response.Content.ReadAsStringAsync();
-                Debug.Log(body);                
+                Debug.Log(body);
                 try
                 {
                     var stuff = (JObject)JsonConvert.DeserializeObject(body);
@@ -42,14 +42,19 @@ public class EventDetails : MonoBehaviour
                     string userId = (string)stuff["eventIds"][0]["userId"];
                     string restaurantId = (string)stuff["eventIds"][0]["restaurantId"];
                     string time = (string)stuff["eventIds"][0]["time"];
-                    Debug.Log(time);
-                    System.DateTime dateTime = System.DateTime.Parse(time);
-                    Debug.Log(dateTime);
-                    string timeText = string.Format("{0:D2}/{1:D2}/{2:D2} {3:D2}:{4:D2}:{5:D2}", dateTime.Year, dateTime.Month, dateTime.Day,dateTime.Hour, dateTime.Minute, dateTime.Second);
-                    Debug.Log(timeText);
                     string numPeople = (string)stuff["eventIds"][0]["numPeople"];
                     string userName = (string)stuff["eventIds"][0]["userName"];
                     string gender = (string)stuff["eventIds"][0]["gender"];
+
+                    string timeText = time;
+                    try
+                    {
+                        System.DateTime dateTime = System.DateTime.Parse(time);
+                        timeText = string.Format("{0:D2}/{1:D2}/{2:D2} {3:D2}:{4:D2}:{5:D2}", dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, dateTime.Minute, dateTime.Second);
+                    }
+                    catch { }
+
+
 
                     PeopleJoinText.text = numPeople + " people joined";
                     TimeText.text = timeText;
