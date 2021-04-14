@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Net.Http;
 using Michsky.UI.ModernUIPack;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 public class HomePage : MonoBehaviour
 {
@@ -19,8 +21,9 @@ public class HomePage : MonoBehaviour
         {
             
             var reqPar = "q=" + SearchInput.text;
-            using (var request = new HttpRequestMessage(new HttpMethod("GET"),
+            using (var request = new HttpRequestMessage(new HttpMethod("GET"),   
                 "https://333f7sxvgg.execute-api.us-west-2.amazonaws.com/v1/search?" + reqPar))
+
             {
                 var response = await httpClient.SendAsync(request);
                 Debug.Log(response);
