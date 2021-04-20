@@ -14,14 +14,14 @@ public class UserProfile : MonoBehaviour
     //This will be called when this page is enabled
     private async void OnEnable()
     {
-        //UpdateUI("John", "John@columbia.edu", "Male");
 
-        var reqPar = "q=";//+ eventId;
+        var reqPar = "q=uid1";//+ userID;
         Debug.Log(reqPar);
         using (var httpClient = new HttpClient())
         {
+            Loading.ShowLoading("Loading User Profile...");
             using (var request = new HttpRequestMessage(new HttpMethod("GET"),
-            "https://omx6f7pb2f.execute-api.us-west-2.amazonaws.com/user_v1/detail?q=uid1"))
+            "https://omx6f7pb2f.execute-api.us-west-2.amazonaws.com/user_v1/detail?" + reqPar))
             {
                 var response = await httpClient.SendAsync(request);
                 Debug.Log(response);
@@ -53,6 +53,7 @@ public class UserProfile : MonoBehaviour
                     Debug.Log(exp);
                 }
             }
+            Loading.CloseLoading();
         }
     }
 
@@ -68,13 +69,14 @@ public class UserProfile : MonoBehaviour
         string name = NameInput.text;
         string email = EmailInput.text;
         string gender_str = GenderInput.text;
+        gender_str = gender_str.ToLower();
 
         int gender = -1;
-        if (gender_str == "Male")
+        if (gender_str == "male")
         {
             gender = 0;
         }
-        else if (gender_str == "Female")
+        else if (gender_str == "female")
         {
             gender = 1;
         }
@@ -105,6 +107,8 @@ public class UserProfile : MonoBehaviour
                 {
                     Debug.Log(exp);
                 }
+
+                PopupManager.OpenPopup("User Profile", "Updated Complete!");
             }
         }
 

@@ -51,6 +51,7 @@ public class CreateEvent : MonoBehaviour
 
         using (var httpClient = new HttpClient())
         {
+            Loading.ShowLoading("Creating Event...");
             //var reqPar = "numPeople=3&time=2021_4_9_12_15_30&restaurantId="+SelectedRestaurentID;
             var reqPar = "numPeople=" + HowManyInput.text + "&time=" + WhenInput.text + "&restaurantId=" + SelectedRestaurentID + "&userId=uid1";
             using (var request = new HttpRequestMessage(new HttpMethod("POST"),
@@ -61,7 +62,7 @@ public class CreateEvent : MonoBehaviour
                 string body = await response.Content.ReadAsStringAsync();
                 Debug.Log(body);
 
-               
+                Loading.CloseLoading();
                 var stuff = (JObject)JsonConvert.DeserializeObject(body);
                 if ((string)stuff["statusCode"] == "200")
                 {
@@ -76,6 +77,7 @@ public class CreateEvent : MonoBehaviour
                     PopupManager.OpenPopup("Sth Go Wrong", body);
                 }
             }
+            
         }
     }
 }

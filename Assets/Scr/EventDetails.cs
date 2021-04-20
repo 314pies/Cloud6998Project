@@ -31,6 +31,7 @@ public class EventDetails : MonoBehaviour
             using (var request = new HttpRequestMessage(new HttpMethod("GET"),
             "https://333f7sxvgg.execute-api.us-west-2.amazonaws.com/v1/detail?" + reqPar))
             {
+                Loading.ShowLoading("Loading Event Details...");
                 var response = await httpClient.SendAsync(request);
                 Debug.Log(response);
                 string body = await response.Content.ReadAsStringAsync();
@@ -63,6 +64,7 @@ public class EventDetails : MonoBehaviour
                 {
                     Debug.Log(exp);
                 }
+                Loading.CloseLoading();
             }
         }
     }
