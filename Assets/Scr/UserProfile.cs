@@ -12,6 +12,8 @@ public class UserProfile : MonoBehaviour
 {
 
     public static string UserID = "936b39a1-c98f-413e-b7d7-7968f227dd9a";
+    //public static string UserID = "uid0b##.=JjRB";
+
     //This will be called when this page is enabled
     private async void OnEnable()
     {
@@ -21,6 +23,7 @@ public class UserProfile : MonoBehaviour
         using (var httpClient = new HttpClient())
         {
             Loading.ShowLoading("Loading User Profile...");
+            Debug.Log(reqPar);
             using (var request = new HttpRequestMessage(new HttpMethod("GET"),
             "https://omx6f7pb2f.execute-api.us-west-2.amazonaws.com/user_v1/detail?" + reqPar))
             {
@@ -31,23 +34,37 @@ public class UserProfile : MonoBehaviour
                 try
                 {
                     var stuff = (JObject)JsonConvert.DeserializeObject(body);
-                    string name = (string)stuff["name"];
-                    string email = (string)stuff["email"];
-                    int gender = (int)stuff["gender"];
-                    string gender_str = "";
-                    if (gender == 0) {
-                        gender_str = "Male";
-                    }
-                    else if(gender == 1)
-                    {
-                        gender_str = "Female";
-                    }
-                    else
-                    {
-                        gender_str = "Unknown";
-                    }
+                    var _name = stuff.GetValue("name");
+                    if(_name!=null)
+                        NameInput.text = (string)_name;
 
-                    UpdateUI(name, email, gender_str);
+                    var _email = stuff.GetValue("email");
+                    if (_email != null)
+                        EmailInput.text = (string)_email;
+
+                    var _gender = stuff.GetValue("gender");
+                    if (_gender != null)
+                    {
+                        int gender = (int)_gender;
+                        string gender_str = "";
+                        if (gender == 0)
+                        {
+                            gender_str = "Male";
+                        }
+                        else if (gender == 1)
+                        {
+                            gender_str = "Female";
+                        }else if (gender == 1)
+                        {
+                            gender_str = "Non-binary";
+                        }
+                        else
+                        {
+                            gender_str = "Unknown";
+                        }
+                        GenderInput.text = gender_str;
+                    }
+                    else { GenderInput.text = "Unknown"; }
                 }
                 catch (Exception exp)
                 {
@@ -112,14 +129,6 @@ public class UserProfile : MonoBehaviour
                 PopupManager.OpenPopup("User Profile", "Updated Complete!");
             }
         }
-
-    }
-
-    public void UpdateUI(string Name, string Email, string Gender)
-    {
-        NameInput.text = Name;
-        EmailInput.text = Email;
-        GenderInput.text = Gender;
 
     }
 }
