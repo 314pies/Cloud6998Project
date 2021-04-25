@@ -58,7 +58,9 @@ public class HomePage : MonoBehaviour
 
     private async void OnEnable()
     {
+       
         LoadRecommend();
+        
     }
 
     public GameObject EventCardTemplate;
@@ -72,10 +74,12 @@ public class HomePage : MonoBehaviour
                 "https://333f7sxvgg.execute-api.us-west-2.amazonaws.com/v1/recommendation?" + reqPar))
 
             {
+                Loading.ShowLoading("Loading Recommendation...");
                 var response = await httpClient.SendAsync(request);
                 Loading.CloseLoading();
                 Debug.Log(response);
                 string body = await response.Content.ReadAsStringAsync();
+                Loading.CloseLoading();
                 Debug.Log(body);
                 var stuff = (JObject)JsonConvert.DeserializeObject(body);
                 var eventIds = (JArray)stuff["eventIds"];
@@ -88,7 +92,6 @@ public class HomePage : MonoBehaviour
 
                 foreach (var _eventId in eventIdList)
                 {
-
                     var _cardInstance = (GameObject)Instantiate(EventCardTemplate);
                     _cardInstance.transform.SetParent(RecommendsRoot);
                     _cardInstance.transform.localScale = new Vector3(1, 1, 1);
