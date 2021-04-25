@@ -55,7 +55,7 @@ public class UserProfile : MonoBehaviour
                         else if (gender == 1)
                         {
                             gender_str = "Female";
-                        }else if (gender == 1)
+                        }else if (gender == 2)
                         {
                             gender_str = "Non-binary";
                         }
