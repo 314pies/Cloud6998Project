@@ -76,7 +76,7 @@ public class EventDetails : MonoBehaviour
         using (var httpClient = new HttpClient())
         {
             //var reqPar = "numPeople=3&time=2021_4_9_12_15_30&restaurantId="+SelectedRestaurentID;
-            var reqPar = "eid=2021-04-05_10:28:33.666930" + "&userId=uid1";
+            var reqPar = "eid=2021-04-05_10:28:33.666930" + "&userId=936b39a1-c98f-413e-b7d7-7968f227dd9a";
             using (var request = new HttpRequestMessage(new HttpMethod("GET"),
                 "https://333f7sxvgg.execute-api.us-west-2.amazonaws.com/v1/drop?" + reqPar))
             {
@@ -98,7 +98,7 @@ public class EventDetails : MonoBehaviour
         using (var httpClient = new HttpClient())
         {
             //var reqPar = "numPeople=3&time=2021_4_9_12_15_30&restaurantId="+SelectedRestaurentID;
-            var reqPar = "eid=2021-04-05_10:28:33.666930" + "&userId=uid1";
+            var reqPar = "eid=2021-04-05_10:28:33.666930" + "&userId=936b39a1-c98f-413e-b7d7-7968f227dd9a";
             using (var request = new HttpRequestMessage(new HttpMethod("POST"),
                 "https://333f7sxvgg.execute-api.us-west-2.amazonaws.com/v1/join?" + reqPar))
             {
