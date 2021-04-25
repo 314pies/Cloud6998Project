@@ -49,6 +49,7 @@ public class EventCard : MonoBehaviour
                     string restaurantId = (string)stuff["eventIds"][0]["restaurantId"];
                     string time = (string)stuff["eventIds"][0]["time"];
                     string numPeople = (string)stuff["eventIds"][0]["numPeople"];
+                    string joinedPeoleNum = (string)stuff["eventIds"][0]["joinedPeoleNum"];
                     string userName = (string)stuff["eventIds"][0]["userName"];
                     string gender = (string)stuff["eventIds"][0]["gender"];
 
@@ -64,7 +65,7 @@ public class EventCard : MonoBehaviour
                     //RestaurentName.text = "Resta ID" + restaurantId;
                     restaurentID = restaurantId;
                     LoadRestaurentDetails(restaurantId);
-                    PeopleJoin.text = numPeople + " people";
+                    PeopleJoin.text = joinedPeoleNum + "/" + numPeople + " people joined";
                     Time.text = timeText;
                 }
                 catch (Exception exp)

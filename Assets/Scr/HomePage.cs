@@ -60,7 +60,7 @@ public class HomePage : MonoBehaviour
         }
     }
 
-    private async void OnEnable()
+    public async void OnEnable()
     {
        
         LoadRecommend();

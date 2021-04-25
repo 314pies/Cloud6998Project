@@ -12382,6 +12382,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 1496190351}
+        m_TargetAssemblyTypeName: HomePage, Assembly-CSharp
+        m_MethodName: OnEnable
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   hoverEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -14079,11 +14091,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d0d163851fb1534a8be2db1422e55c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventId: 2021-04-25_01:28:43.085771
+  eventId: 2021-04-25_02:24:43.416186
   PeopleJoinText: {fileID: 1112862239}
   TimeText: {fileID: 1874566988}
   RestaurentName: {fileID: 427655536}
   restaurentImage: {fileID: 1533232866}
+  Participents: []
   JoinButton: {fileID: 1082704710}
   DropButton: {fileID: 1013372734}
 --- !u!1 &1549329872
@@ -18494,7 +18507,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 428368021}
   m_HandleRect: {fileID: 428368020}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:

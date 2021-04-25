@@ -18,6 +18,9 @@ public class EventDetails : MonoBehaviour
     public TMP_Text PeopleJoinText, TimeText, RestaurentName;
     public Image restaurentImage;
 
+
+    public List<string> Participents = new List<string>();
+
     public void SetEventID(string eventId)
     {
         this.eventId = eventId;
@@ -46,6 +49,8 @@ public class EventDetails : MonoBehaviour
                     string restaurantId = (string)stuff["eventIds"][0]["restaurantId"];
                     string time = (string)stuff["eventIds"][0]["time"];
                     string numPeople = (string)stuff["eventIds"][0]["numPeople"];
+                    string joinedPeoleNum = (string)stuff["eventIds"][0]["joinedPeoleNum"];
+                    var participants = (JArray)stuff["eventIds"][0]["participants"];
                     string userName = (string)stuff["eventIds"][0]["userName"];
                     string gender = (string)stuff["eventIds"][0]["gender"];
 
@@ -57,9 +62,14 @@ public class EventDetails : MonoBehaviour
                     }
                     catch { }
 
+                    Participents.Clear();
+                    if (participants != null)
+                    {
+                        Participents = participants.ToObject<List<string>>();
+                    }
 
 
-                    PeopleJoinText.text = numPeople + " people";
+                    PeopleJoinText.text = joinedPeoleNum + "/" + numPeople + " people joined";
                     TimeText.text = timeText;
                     LoadRestaurentDetails(restaurantId);
                 }
@@ -71,7 +81,7 @@ public class EventDetails : MonoBehaviour
             }
         }
 
-        CheckEventJoinStatus(UserProfile.UserID);
+        CheckEventJoinStatus();
     }
 
     public async void OnDropButtonClicked()
@@ -92,14 +102,15 @@ public class EventDetails : MonoBehaviour
                 Debug.Log(body);
                 var _result = (JObject)JsonConvert.DeserializeObject(body);
 
-                if((string)_result["statusCode"] == "200")
+                if ((string)_result["statusCode"] == "200")
                 {
                     PopupManager.OpenPopup("Drop Success", "");
                 }
                 else
                 {
                     PopupManager.OpenPopup("Sth Go Wrong", body);
-                }             
+                }
+                OnEnable();
             }
         }
 
@@ -130,6 +141,7 @@ public class EventDetails : MonoBehaviour
                 {
                     PopupManager.OpenPopup("Sth Go Wrong", body);
                 }
+                OnEnable();
             }
         }
     }
@@ -171,33 +183,17 @@ public class EventDetails : MonoBehaviour
 
 
     public GameObject JoinButton, DropButton;
-    public async void CheckEventJoinStatus(string userId)
+    public void CheckEventJoinStatus()
     {
-        using (var httpClient = new HttpClient())
+        bool _isJoin = false;
+        foreach (var _userId in Participents)
         {
-            using (var request = new HttpRequestMessage(new HttpMethod("GET"),
-            "https://333f7sxvgg.execute-api.us-west-2.amazonaws.com/v1/searchbyuid?q=" + userId))
+            if (UserProfile.UserID == _userId)
             {
-                var response = await httpClient.SendAsync(request);
-                Debug.Log("CheckEventJoinStatus()");
-                Debug.Log(response);
-                string body = await response.Content.ReadAsStringAsync();
-                Debug.Log(body);
-
-                var eventIds = (JArray)JsonConvert.DeserializeObject(body);
-                var eventIdList = eventIds.ToObject<List<string>>();
-                bool _isJoin = false;
-                foreach (var _eventId in eventIdList)
-                {
-                    if (_eventId == eventId)
-                    {
-                        _isJoin = true;
-                    }
-                }
-                JoinButton.SetActive(!_isJoin);
-                DropButton.SetActive(_isJoin);
+                _isJoin = true;
             }
         }
-
+        JoinButton.SetActive(!_isJoin);
+        DropButton.SetActive(_isJoin);
     }
 }
