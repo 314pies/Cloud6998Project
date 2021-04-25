@@ -16,17 +16,6 @@ public class SearchByUIDTest : MonoBehaviour
     async void Start()
     {
         //
-        using (var httpClient = new HttpClient())
-        {
-            using (var request = new HttpRequestMessage(new HttpMethod("GET"),
-            "https://333f7sxvgg.execute-api.us-west-2.amazonaws.com/v1/searchbyuid?q=" + UserProfile.UserID))
-            {              
-                var response = await httpClient.SendAsync(request);
-                Debug.Log(response);
-                string body = await response.Content.ReadAsStringAsync();
-                Debug.Log(body);
-            }
-        }
     }
 
     // Update is called once per frame

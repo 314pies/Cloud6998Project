@@ -57,7 +57,7 @@ public class EventDetails : MonoBehaviour
                     }
                     catch { }
 
-                    
+
 
                     PeopleJoinText.text = numPeople + " people joined";
                     TimeText.text = timeText;
@@ -70,6 +70,8 @@ public class EventDetails : MonoBehaviour
                 Loading.CloseLoading();
             }
         }
+
+        CheckEventJoinStatus(UserProfile.UserID);
     }
 
     public async void OnDropButtonClicked()
@@ -79,7 +81,7 @@ public class EventDetails : MonoBehaviour
         using (var httpClient = new HttpClient())
         {
             //var reqPar = "numPeople=3&time=2021_4_9_12_15_30&restaurantId="+SelectedRestaurentID;
-            var reqPar = "eid=2021-04-05_10:28:33.666930" + "&userId=" + UserProfile.UserID;
+            var reqPar = "eid=" + eventId + "&userId=" + UserProfile.UserID;
             using (var request = new HttpRequestMessage(new HttpMethod("GET"),
                 "https://333f7sxvgg.execute-api.us-west-2.amazonaws.com/v1/drop?" + reqPar))
             {
@@ -101,7 +103,7 @@ public class EventDetails : MonoBehaviour
         using (var httpClient = new HttpClient())
         {
             //var reqPar = "numPeople=3&time=2021_4_9_12_15_30&restaurantId="+SelectedRestaurentID;
-            var reqPar = "eid=2021-04-05_10:28:33.666930" + "&userId=" + UserProfile.UserID;
+            var reqPar = "eid=" + eventId + "&userId=" + UserProfile.UserID;
             using (var request = new HttpRequestMessage(new HttpMethod("POST"),
                 "https://333f7sxvgg.execute-api.us-west-2.amazonaws.com/v1/join?" + reqPar))
             {
@@ -148,5 +150,37 @@ public class EventDetails : MonoBehaviour
         WWW www = new WWW(url);
         yield return www;
         img.sprite = Sprite.Create(www.texture, new Rect(0, 0, www.texture.width, www.texture.height), new Vector2(0, 0));
+    }
+
+
+    public GameObject JoinButton, DropButton;
+    public async void CheckEventJoinStatus(string userId)
+    {
+        using (var httpClient = new HttpClient())
+        {
+            using (var request = new HttpRequestMessage(new HttpMethod("GET"),
+            "https://333f7sxvgg.execute-api.us-west-2.amazonaws.com/v1/searchbyuid?q=" + userId))
+            {
+                var response = await httpClient.SendAsync(request);
+                Debug.Log("CheckEventJoinStatus()");
+                Debug.Log(response);
+                string body = await response.Content.ReadAsStringAsync();
+                Debug.Log(body);
+
+                var eventIds = (JArray)JsonConvert.DeserializeObject(body);
+                var eventIdList = eventIds.ToObject<List<string>>();
+                bool _isJoin = false;
+                foreach (var _eventId in eventIdList)
+                {
+                    if (_eventId == eventId)
+                    {
+                        _isJoin = true;
+                    }
+                }
+                JoinButton.SetActive(!_isJoin);
+                DropButton.SetActive(_isJoin);
+            }
+        }
+
     }
 }
