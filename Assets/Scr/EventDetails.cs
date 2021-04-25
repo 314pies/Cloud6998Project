@@ -57,7 +57,7 @@ public class EventDetails : MonoBehaviour
                     }
                     catch { }
 
-
+                    
 
                     PeopleJoinText.text = numPeople + " people joined";
                     TimeText.text = timeText;

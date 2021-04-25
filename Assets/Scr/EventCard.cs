@@ -11,7 +11,9 @@ using UnityEngine.UI;
 public class EventCard : MonoBehaviour
 {
     public TMP_Text Time, PeopleJoin, RestaurentName;
-    public string eventID, restaurentID;
+    public string eventID;
+    
+    public string restaurentID;
     public Image restaurentImage;
 
     public void OnCardClicked()
@@ -35,7 +37,6 @@ public class EventCard : MonoBehaviour
             using (var request = new HttpRequestMessage(new HttpMethod("GET"),
             "https://333f7sxvgg.execute-api.us-west-2.amazonaws.com/v1/detail?" + reqPar))
             {
-                Loading.ShowLoading("Loading Event Details...");
                 var response = await httpClient.SendAsync(request);
                 Debug.Log(response);
                 string body = await response.Content.ReadAsStringAsync();
@@ -70,7 +71,6 @@ public class EventCard : MonoBehaviour
                 {
                     Debug.Log(exp);
                 }
-                Loading.CloseLoading();
             }
         }
     }
@@ -81,7 +81,9 @@ public class EventCard : MonoBehaviour
         {
 
             //var reqPar = "numPeople=3&time=2021_4_9_12_15_30&restaurantId="+SelectedRestaurentID;
-            var reqPar = "eH0bypB-IqUH73IVgEEfPA";
+            //var reqPar = "eH0bypB-IqUH73IVgEEfPA";
+            var reqPar = restrauntId;
+
             using (var request = new HttpRequestMessage(new HttpMethod("GET"),
                 "https://ir5pgsnsfk.execute-api.us-west-2.amazonaws.com/v_0_0/searchbyrid?q=" + reqPar))
             {
@@ -96,7 +98,8 @@ public class EventCard : MonoBehaviour
                 var image_url = stuff[0]["image_url"];
                 Debug.Log(restarName);
                 Debug.Log(image_url);
-                //StartCoroutine(LoadImage())
+                RestaurentName.text = (string)restarName;
+                StartCoroutine(LoadImage(restaurentImage, (string)image_url));
             }
 
         }

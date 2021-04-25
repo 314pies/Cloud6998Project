@@ -3603,7 +3603,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4772,7 +4772,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: -120.599976}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &591721251
 MonoBehaviour:
@@ -9241,7 +9241,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 963194225}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29bda4e9dd42c4c4a863143f41a22e50, type: 3}
+  m_Script: {fileID: 11500000, guid: 06516a4cbe02d5c41809f9e2223dc624, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &976423905
@@ -11545,10 +11545,10 @@ RectTransform:
   m_Father: {fileID: 591721250}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 447.15002, y: -705}
-  m_SizeDelta: {x: 854.30005, y: 450}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 450}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1267607490
 MonoBehaviour:
@@ -13582,7 +13582,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1496190350
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16008,7 +16008,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5993043510659866380, guid: b22c818330dddcb4687c6b7406418b15, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5993043510659866380, guid: b22c818330dddcb4687c6b7406418b15, type: 3}
       propertyPath: m_AnchorMin.x
@@ -16016,11 +16016,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5993043510659866380, guid: b22c818330dddcb4687c6b7406418b15, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5993043510659866380, guid: b22c818330dddcb4687c6b7406418b15, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 854.30005
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5993043510659866380, guid: b22c818330dddcb4687c6b7406418b15, type: 3}
       propertyPath: m_SizeDelta.y
@@ -16056,11 +16056,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5993043510659866380, guid: b22c818330dddcb4687c6b7406418b15, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 447.15002
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5993043510659866380, guid: b22c818330dddcb4687c6b7406418b15, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -240
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5993043510659866380, guid: b22c818330dddcb4687c6b7406418b15, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -16077,6 +16077,14 @@ PrefabInstance:
     - target: {fileID: 5993043510659866381, guid: b22c818330dddcb4687c6b7406418b15, type: 3}
       propertyPath: m_Name
       value: EventCard
+      objectReference: {fileID: 0}
+    - target: {fileID: 5993043510659866381, guid: b22c818330dddcb4687c6b7406418b15, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7473911878555142469, guid: b22c818330dddcb4687c6b7406418b15, type: 3}
+      propertyPath: eventID
+      value: 2021-04-25_01:28:43.085771
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b22c818330dddcb4687c6b7406418b15, type: 3}
@@ -18492,7 +18500,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 428368021}
   m_HandleRect: {fileID: 428368020}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
