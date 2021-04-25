@@ -24,6 +24,7 @@ public class SearchByUIDTest : MonoBehaviour
                 var response = await httpClient.SendAsync(request);
                 Debug.Log(response);
                 string body = await response.Content.ReadAsStringAsync();
+                Debug.Log(body);
             }
         }
     }

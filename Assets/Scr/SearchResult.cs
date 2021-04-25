@@ -19,10 +19,17 @@ public class SearchResult : MonoBehaviour
     public async void ShowResult(List<string> result)
     {
         foreach (var a in result) { Debug.Log(a); }
+        foreach (Transform child in CardsRoot.transform)
+        {
+            GameObject.Destroy(child.gameObject);
+        }
+
         foreach (var _eventId in result)
         {
+
             var _cardInstance = (GameObject)Instantiate(Template);
             _cardInstance.transform.SetParent(CardsRoot);
+            _cardInstance.transform.localScale = new Vector3(1,1,1);
             var _eventCard = _cardInstance.GetComponent<EventCard>();
             _eventCard.eventID = _eventId;
             _eventCard.LoadEventDetails();
