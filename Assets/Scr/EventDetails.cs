@@ -91,6 +91,7 @@ public class EventDetails : MonoBehaviour
         using (var httpClient = new HttpClient())
         {
             //var reqPar = "numPeople=3&time=2021_4_9_12_15_30&restaurantId="+SelectedRestaurentID;
+            Loading.ShowLoading("Dropping...");
             var reqPar = "eid=" + eventId + "&userId=" + UserProfile.UserID;
             Debug.Log("reqPar: " + reqPar);
             using (var request = new HttpRequestMessage(new HttpMethod("POST"),
@@ -100,6 +101,7 @@ public class EventDetails : MonoBehaviour
                 Debug.Log(response);
                 string body = await response.Content.ReadAsStringAsync();
                 Debug.Log(body);
+                Loading.CloseLoading();
                 var _result = (JObject)JsonConvert.DeserializeObject(body);
 
                 if ((string)_result["statusCode"] == "200")
@@ -119,7 +121,7 @@ public class EventDetails : MonoBehaviour
     public async void OnJoinButtonClicked()
     {
         Debug.Log("OnJoinButtonClicked");
-
+        Loading.ShowLoading("Joining...");
         using (var httpClient = new HttpClient())
         {
             //var reqPar = "numPeople=3&time=2021_4_9_12_15_30&restaurantId="+SelectedRestaurentID;
@@ -130,6 +132,7 @@ public class EventDetails : MonoBehaviour
                 var response = await httpClient.SendAsync(request);
                 Debug.Log(response);
                 string body = await response.Content.ReadAsStringAsync();
+                Loading.CloseLoading();
                 Debug.Log(body);
                 var _result = (JObject)JsonConvert.DeserializeObject(body);
 
@@ -195,5 +198,20 @@ public class EventDetails : MonoBehaviour
         }
         JoinButton.SetActive(!_isJoin);
         DropButton.SetActive(_isJoin);
+    }
+
+    [Header("Back Buttom Parameters")]
+    public HomePage homePage;
+    public MyEvents myEvent;
+    public void OnBackButtonPressed()
+    {
+        if (homePage.gameObject.activeSelf)
+        {
+            homePage.LoadRecommend();
+        }
+        if (myEvent.gameObject.activeSelf)
+        {
+            myEvent.OnEnable();
+        }
     }
 }

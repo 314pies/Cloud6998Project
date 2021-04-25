@@ -9,7 +9,10 @@ public class Login : MonoBehaviour
     TMP_InputField UserIDInput;
     public void OnLoginPressed()
     {
-        UserProfile.UserID = UserIDInput.text;
+        if(string.IsNullOrEmpty(UserIDInput.text) == false)
+        {
+            UserProfile.UserID = UserIDInput.text;
+        }       
         StartCoroutine(WaitAndLoad());
 
     }
@@ -17,11 +20,12 @@ public class Login : MonoBehaviour
     public GameObject HomePage;
     IEnumerator WaitAndLoad()
     {
-        Loading.ShowLoading("Loggin In");
-        yield return new WaitForSeconds(Random.Range(0.5f,5.0f));
+        Loading.ShowLoading("Logging In");
+        yield return new WaitForSeconds(Random.Range(0.5f,4.5f));
+        Loading.CloseLoading();
         HomePage.SetActive(true);
         gameObject.SetActive(false);
-        Loading.CloseLoading();
+       
         Debug.Log("Login Success, UserID: " + UserProfile.UserID);
     }
 }

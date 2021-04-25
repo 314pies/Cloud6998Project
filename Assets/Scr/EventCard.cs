@@ -12,7 +12,9 @@ public class EventCard : MonoBehaviour
 {
     public TMP_Text Time, PeopleJoin, RestaurentName;
     public string eventID;
-    
+
+    public TMP_Text IsJoined;
+
     public string restaurentID;
     public Image restaurentImage;
 
@@ -50,6 +52,7 @@ public class EventCard : MonoBehaviour
                     string time = (string)stuff["eventIds"][0]["time"];
                     string numPeople = (string)stuff["eventIds"][0]["numPeople"];
                     string joinedPeoleNum = (string)stuff["eventIds"][0]["joinedPeoleNum"];
+                    var participants = (JArray)stuff["eventIds"][0]["participants"];
                     string userName = (string)stuff["eventIds"][0]["userName"];
                     string gender = (string)stuff["eventIds"][0]["gender"];
 
@@ -67,6 +70,20 @@ public class EventCard : MonoBehaviour
                     LoadRestaurentDetails(restaurantId);
                     PeopleJoin.text = joinedPeoleNum + "/" + numPeople + " people joined";
                     Time.text = timeText;
+
+                    if (participants != null)
+                    {
+                        var Participents = participants.ToObject<List<string>>();
+                        bool _isJoined = false;
+                        foreach(var _uid in Participents)
+                        {
+                            if(_uid == UserProfile.UserID)
+                            {
+                                _isJoined = true;
+                            }
+                        }
+                        IsJoined.gameObject.SetActive(_isJoined);
+                    }
                 }
                 catch (Exception exp)
                 {
