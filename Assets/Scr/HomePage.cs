@@ -80,6 +80,11 @@ public class HomePage : MonoBehaviour
                 var stuff = (JObject)JsonConvert.DeserializeObject(body);
                 var eventIds = (JArray)stuff["eventIds"];
                 var eventIdList = eventIds.ToObject<List<string>>();
+                
+                foreach (Transform child in RecommendsRoot.transform)
+                {
+                    GameObject.Destroy(child.gameObject);
+                }
 
                 foreach (var _eventId in eventIdList)
                 {
