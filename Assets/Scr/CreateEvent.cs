@@ -53,7 +53,7 @@ public class CreateEvent : MonoBehaviour
         {
             Loading.ShowLoading("Creating Event...");
             //var reqPar = "numPeople=3&time=2021_4_9_12_15_30&restaurantId="+SelectedRestaurentID;
-            var reqPar = "numPeople=" + HowManyInput.text + "&time=" + WhenInput.text + "&restaurantId=" + SelectedRestaurentID + "&userId=uid1";
+            var reqPar = "numPeople=" + HowManyInput.text + "&time=" + WhenInput.text + "&restaurantId=" + SelectedRestaurentID + "&userId=936b39a1-c98f-413e-b7d7-7968f227dd9a";
             using (var request = new HttpRequestMessage(new HttpMethod("POST"),
                 "https://333f7sxvgg.execute-api.us-west-2.amazonaws.com/v1/create?" + reqPar))
             {
