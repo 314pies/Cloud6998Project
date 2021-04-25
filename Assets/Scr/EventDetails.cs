@@ -82,7 +82,7 @@ public class EventDetails : MonoBehaviour
         {
             //var reqPar = "numPeople=3&time=2021_4_9_12_15_30&restaurantId="+SelectedRestaurentID;
             var reqPar = "eid=" + eventId + "&userId=" + UserProfile.UserID;
-            using (var request = new HttpRequestMessage(new HttpMethod("GET"),
+            using (var request = new HttpRequestMessage(new HttpMethod("POST"),
                 "https://333f7sxvgg.execute-api.us-west-2.amazonaws.com/v1/drop?" + reqPar))
             {
                 var response = await httpClient.SendAsync(request);
