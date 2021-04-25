@@ -99,7 +99,7 @@ public class EventCard : MonoBehaviour
                 Debug.Log(restarName);
                 Debug.Log(image_url);
                 RestaurentName.text = (string)restarName;
-                //StartCoroutine(LoadImage(restaurentImage, (string)image_url));
+                StartCoroutine(LoadImage(restaurentImage, (string)image_url));
             }
 
         }

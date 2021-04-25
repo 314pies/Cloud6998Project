@@ -132,7 +132,7 @@ public class HomePage : MonoBehaviour
                     if (_picture != null)
                     {
                         Debug.Log("Avatar URL: "+ _picture);
-                        StartCoroutine(LoadAvatar((string)_picture));
+                        //StartCoroutine(LoadAvatar((string)_picture));
                     }
                 }
                 catch (Exception exp)
