@@ -106,7 +106,7 @@ public class EventDetails : MonoBehaviour
 
                 if ((string)_result["statusCode"] == "200")
                 {
-                    PopupManager.OpenPopup("Drop Success", "");
+                    PopupManager.OpenPopup("Dropped", "Successfully drop from this event");
                 }
                 else
                 {
@@ -138,7 +138,7 @@ public class EventDetails : MonoBehaviour
 
                 if ((string)_result["statusCode"] == "200")
                 {
-                    PopupManager.OpenPopup("Join Success", "");
+                    PopupManager.OpenPopup("Joined", "Successfully joined this event");
                 }
                 else
                 {
