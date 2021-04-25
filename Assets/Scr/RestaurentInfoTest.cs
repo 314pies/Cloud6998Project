@@ -25,17 +25,11 @@ public class RestaurentInfoTest : MonoBehaviour
                 Debug.Log(body);
 
                
-                var stuff = (JObject)JsonConvert.DeserializeObject(body);
-                if ((string)stuff["statusCode"] == "200")
-                {
-                    string evendID = (string)stuff["body"];
-                    Debug.Log("Create Success, eventID: " + evendID);
-                    this.gameObject.SetActive(false);
-                }
-                else
-                {
-                    PopupManager.OpenPopup("Sth Go Wrong", body);
-                }
+                var stuff = (JArray)JsonConvert.DeserializeObject(body);
+                var restarName = stuff[0]["name"];
+                var image_url = stuff[0]["image_url"];
+                Debug.Log(restarName);
+                Debug.Log(image_url);                
             }
 
         }

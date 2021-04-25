@@ -15,7 +15,9 @@ public class EventDetails : MonoBehaviour
     public string eventId = "2021-04-11_16:29:59.389352";
 
 
-    public TMP_Text PeopleJoinText, TimeText;
+    public TMP_Text PeopleJoinText, TimeText, RestaurentName;
+    public Image restaurentImage;
+
     public void SetEventID(string eventId)
     {
         this.eventId = eventId;
@@ -59,6 +61,7 @@ public class EventDetails : MonoBehaviour
 
                     PeopleJoinText.text = numPeople + " people joined";
                     TimeText.text = timeText;
+                    LoadRestaurentDetails(restaurantId);
                 }
                 catch (Exception exp)
                 {
@@ -110,5 +113,40 @@ public class EventDetails : MonoBehaviour
                 PopupManager.OpenPopup("API result", body);
             }
         }
+    }
+
+    public async void LoadRestaurentDetails(string restrauntId)
+    {
+        using (var httpClient = new HttpClient())
+        {
+
+            //var reqPar = "numPeople=3&time=2021_4_9_12_15_30&restaurantId="+SelectedRestaurentID;
+            //var reqPar = "eH0bypB-IqUH73IVgEEfPA";
+            var reqPar = restrauntId;
+            using (var request = new HttpRequestMessage(new HttpMethod("GET"),
+                "https://ir5pgsnsfk.execute-api.us-west-2.amazonaws.com/v_0_0/searchbyrid?q=" + reqPar))
+            {
+                var response = await httpClient.SendAsync(request);
+                Debug.Log(response);
+                string body = await response.Content.ReadAsStringAsync();
+                Debug.Log(body);
+
+
+                var stuff = (JArray)JsonConvert.DeserializeObject(body);
+                var restarName = stuff[0]["name"];
+                var image_url = stuff[0]["image_url"];
+                Debug.Log(restarName);
+                Debug.Log(image_url);
+                RestaurentName.text = (string)restarName;
+                StartCoroutine(LoadImage(restaurentImage, (string)image_url));
+            }
+
+        }
+    }
+    IEnumerator LoadImage(Image img, string url)
+    {
+        WWW www = new WWW(url);
+        yield return www;
+        img.sprite = Sprite.Create(www.texture, new Rect(0, 0, www.texture.width, www.texture.height), new Vector2(0, 0));
     }
 }
