@@ -11,6 +11,15 @@ public class HomePage : MonoBehaviour
     TMP_InputField SearchInput;
     [SerializeField]
     SearchResult searchResult;
+    [SerializeField]
+    public EventDetails eventDetails;
+
+    public static HomePage Singleton { get; private set; }
+
+    private void Awake()
+    {
+        Singleton = this;
+    }
 
     public async void OnSearchButtonClicked()
     {
