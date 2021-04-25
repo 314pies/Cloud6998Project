@@ -11,12 +11,12 @@ using System;
 public class UserProfile : MonoBehaviour
 {
 
-    public static string UserID = "936b39a1-c98f-413e-b7d7-7968f227dd9a";
+    public static string UserID = UserProfile.UserID; //"936b39a1-c98f-413e-b7d7-7968f227dd9a";
     //This will be called when this page is enabled
     private async void OnEnable()
     {
 
-        var reqPar = "q=uid1";//+ userID;
+        var reqPar = "q=" + UserProfile.UserID; // uid1";//+ userID;
         Debug.Log(reqPar);
         using (var httpClient = new HttpClient())
         {
