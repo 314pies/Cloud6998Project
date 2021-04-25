@@ -7,10 +7,11 @@ using Michsky.UI.ModernUIPack;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using UnityEngine.UI;
 
 public class UserProfile : MonoBehaviour
 {
-
+    public Image Avatar;
     public static string UserID = "936b39a1-c98f-413e-b7d7-7968f227dd9a";
     //public static string UserID = "uid0b##.=JjRB";
 
@@ -65,6 +66,12 @@ public class UserProfile : MonoBehaviour
                         GenderInput.text = gender_str;
                     }
                     else { GenderInput.text = "Unknown"; }
+                    
+                    var _picture = stuff.GetValue("picture");
+                    if (_picture != null)
+                    {
+                        StartCoroutine(LoadImage(Avatar, (string)_picture));                                            
+                    }
                 }
                 catch (Exception exp)
                 {
@@ -73,6 +80,13 @@ public class UserProfile : MonoBehaviour
             }
             Loading.CloseLoading();
         }
+    }
+
+    IEnumerator LoadImage(Image img, string url)
+    {
+        WWW www = new WWW(url);
+        yield return www;
+        img.sprite = Sprite.Create(www.texture, new Rect(0, 0, www.texture.width, www.texture.height), new Vector2(0, 0));
     }
 
     [SerializeField]

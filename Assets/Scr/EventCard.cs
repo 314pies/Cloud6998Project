@@ -64,7 +64,7 @@ public class EventCard : MonoBehaviour
                     //RestaurentName.text = "Resta ID" + restaurantId;
                     restaurentID = restaurantId;
                     LoadRestaurentDetails(restaurantId);
-                    PeopleJoin.text = numPeople + " people joined";
+                    PeopleJoin.text = numPeople + " people";
                     Time.text = timeText;
                 }
                 catch (Exception exp)
@@ -99,7 +99,7 @@ public class EventCard : MonoBehaviour
                 Debug.Log(restarName);
                 Debug.Log(image_url);
                 RestaurentName.text = (string)restarName;
-                StartCoroutine(LoadImage(restaurentImage, (string)image_url));
+                //StartCoroutine(LoadImage(restaurentImage, (string)image_url));
             }
 
         }

@@ -1,9 +1,13 @@
+using Michsky.UI.ModernUIPack;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Net.Http;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HomePage : MonoBehaviour
 {
@@ -60,7 +64,7 @@ public class HomePage : MonoBehaviour
     {
        
         LoadRecommend();
-        
+        LoadUserAvatar();
     }
 
     public GameObject EventCardTemplate;
@@ -102,5 +106,48 @@ public class HomePage : MonoBehaviour
             }
 
         }
+    }
+
+    public ButtonManagerIcon UserProfileButton;
+    public async void LoadUserAvatar()
+    {
+        var reqPar = "q=" + UserProfile.UserID; // uid1";//+ userID;
+        Debug.Log(reqPar);
+        using (var httpClient = new HttpClient())
+        {
+           
+            Debug.Log(reqPar);
+            using (var request = new HttpRequestMessage(new HttpMethod("GET"),
+            "https://omx6f7pb2f.execute-api.us-west-2.amazonaws.com/user_v1/detail?" + reqPar))
+            {
+                var response = await httpClient.SendAsync(request);
+                Debug.Log(response);
+                string body = await response.Content.ReadAsStringAsync();
+                Debug.Log(body);
+                try
+                {
+                    var stuff = (JObject)JsonConvert.DeserializeObject(body);
+
+                    var _picture = stuff.GetValue("picture");
+                    if (_picture != null)
+                    {
+                        Debug.Log("Avatar URL: "+ _picture);
+                        StartCoroutine(LoadAvatar((string)_picture));
+                    }
+                }
+                catch (Exception exp)
+                {
+                    Debug.Log(exp);
+                }
+            }
+        }
+    }
+
+    IEnumerator LoadAvatar(string url)
+    {
+        WWW www = new WWW(url);
+        yield return www;
+        UserProfileButton.buttonIcon = Sprite.Create(www.texture, new Rect(0, 0, www.texture.width, www.texture.height), new Vector2(0, 0));
+        UserProfileButton.UpdateUI();
     }
 }

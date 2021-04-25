@@ -59,7 +59,7 @@ public class EventDetails : MonoBehaviour
 
 
 
-                    PeopleJoinText.text = numPeople + " people joined";
+                    PeopleJoinText.text = numPeople + " people";
                     TimeText.text = timeText;
                     LoadRestaurentDetails(restaurantId);
                 }
@@ -82,6 +82,7 @@ public class EventDetails : MonoBehaviour
         {
             //var reqPar = "numPeople=3&time=2021_4_9_12_15_30&restaurantId="+SelectedRestaurentID;
             var reqPar = "eid=" + eventId + "&userId=" + UserProfile.UserID;
+            Debug.Log("reqPar: " + reqPar);
             using (var request = new HttpRequestMessage(new HttpMethod("POST"),
                 "https://333f7sxvgg.execute-api.us-west-2.amazonaws.com/v1/drop?" + reqPar))
             {
@@ -89,8 +90,16 @@ public class EventDetails : MonoBehaviour
                 Debug.Log(response);
                 string body = await response.Content.ReadAsStringAsync();
                 Debug.Log(body);
+                var _result = (JObject)JsonConvert.DeserializeObject(body);
 
-                PopupManager.OpenPopup("API result", body);
+                if((string)_result["statusCode"] == "200")
+                {
+                    PopupManager.OpenPopup("Drop Success", "");
+                }
+                else
+                {
+                    PopupManager.OpenPopup("Sth Go Wrong", body);
+                }             
             }
         }
 
@@ -111,8 +120,16 @@ public class EventDetails : MonoBehaviour
                 Debug.Log(response);
                 string body = await response.Content.ReadAsStringAsync();
                 Debug.Log(body);
+                var _result = (JObject)JsonConvert.DeserializeObject(body);
 
-                PopupManager.OpenPopup("API result", body);
+                if ((string)_result["statusCode"] == "200")
+                {
+                    PopupManager.OpenPopup("Join Success", "");
+                }
+                else
+                {
+                    PopupManager.OpenPopup("Sth Go Wrong", body);
+                }
             }
         }
     }
