@@ -92,7 +92,7 @@ public class UserProfile : MonoBehaviour
         using (var httpClient = new HttpClient())
         {
             using (var request = new HttpRequestMessage(new HttpMethod("POST"),
-            "https://omx6f7pb2f.execute-api.us-west-2.amazonaws.com/user_v1/update?userId=uid1&"+ reqPar))
+            "https://omx6f7pb2f.execute-api.us-west-2.amazonaws.com/user_v1/update?userId="+ UserProfile.UserID + "&"+ reqPar))
             {
                 var response = await httpClient.SendAsync(request);
                 Debug.Log(response);
