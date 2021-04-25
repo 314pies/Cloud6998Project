@@ -11,6 +11,7 @@ using System;
 public class UserProfile : MonoBehaviour
 {
 
+    public static string UserID = "936b39a1-c98f-413e-b7d7-7968f227dd9a";
     //This will be called when this page is enabled
     private async void OnEnable()
     {

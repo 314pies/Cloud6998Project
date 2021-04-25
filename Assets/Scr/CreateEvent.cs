@@ -21,7 +21,7 @@ public class CreateEvent : MonoBehaviour
     CustomDropdown RestaurentSelector;
 
     Dictionary<int, string> UISelectedItemIDToRestaurentID = new Dictionary<int, string>() {
-        { 0,"rid1"},
+        { 0,"eH0bypB-IqUH73IVgEEfPA"},
         { 1,"rid2"}
     };
 
