@@ -78,6 +78,7 @@ public class HomePage : MonoBehaviour
                 "https://333f7sxvgg.execute-api.us-west-2.amazonaws.com/v1/recommendation?" + reqPar))
 
             {
+                Debug.Log("LoadRecommend, reqPar: " + reqPar);
                 Loading.ShowLoading("Loading Recommendation...");
                 var response = await httpClient.SendAsync(request);
                 Loading.CloseLoading();
@@ -87,6 +88,7 @@ public class HomePage : MonoBehaviour
                 Debug.Log(body);
                 var stuff = (JObject)JsonConvert.DeserializeObject(body);
                 var eventIds = (JArray)stuff["eventIds"];
+                if (eventIds == null) { return; }
                 var eventIdList = eventIds.ToObject<List<string>>();
                 
                 foreach (Transform child in RecommendsRoot.transform)
