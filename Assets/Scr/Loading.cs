@@ -15,16 +15,26 @@ public class Loading : MonoBehaviour
     {
         Singleton = this;
     }
-
+    const string prefabPath = "Canvas_Loading";
+    static void checkSingleton()
+    {
+        if (Singleton == null)
+        {
+            var instance = (GameObject)Instantiate(Resources.Load(prefabPath));
+            Singleton = instance.GetComponent<Loading>();
+        }
+    }
 
     public static void ShowLoading(string message)
     {
+        checkSingleton();
         Singleton.loadingMessage.text = message;
         Singleton.Root.gameObject.SetActive(true);
     }
 
     public static void CloseLoading()
     {
+        checkSingleton();
         Singleton.Root.gameObject.SetActive(false);
     }
 }
