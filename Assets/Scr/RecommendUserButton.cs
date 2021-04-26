@@ -33,7 +33,7 @@ public class RecommendUserButton : MonoBehaviour
     {
         this.userId = _userId;
 
-        var reqPar = "q=" + UserProfile.UserID; // uid1";//+ userID;
+        var reqPar = "q=" + this.userId; // uid1";//+ userID;
         Debug.Log(reqPar);
         using (var httpClient = new HttpClient())
         {
