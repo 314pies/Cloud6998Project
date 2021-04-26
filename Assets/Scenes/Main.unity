@@ -1825,7 +1825,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AvatarImg: {fileID: 729582163}
-  userId: 936b39a1-c98f-413e-b7d7-7968f227dd9a
+  userId: 
   AvatarSprite: {fileID: 0}
   UserName: 
   Email: 
@@ -5280,7 +5280,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -6914,7 +6914,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: -913.06}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &591721251
 MonoBehaviour:
@@ -9264,7 +9264,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AvatarImg: {fileID: 173689129}
-  userId: 936b39a1-c98f-413e-b7d7-7968f227dd9a
+  userId: 
   AvatarSprite: {fileID: 0}
   UserName: 
   Email: 
@@ -10322,6 +10322,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc405a930a982dc488166adccd5217a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UserButtons:
+  - {fileID: 1595280463}
+  - {fileID: 773787582}
+  - {fileID: 149533323}
 --- !u!1 &850571995
 GameObject:
   m_ObjectHideFlags: 0
@@ -12888,7 +12892,6 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
-  - component: {fileID: 963194229}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -12961,18 +12964,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &963194229
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06516a4cbe02d5c41809f9e2223dc624, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &976423905
 GameObject:
   m_ObjectHideFlags: 0
@@ -18808,7 +18799,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1496190350
 RectTransform:
   m_ObjectHideFlags: 0
@@ -19578,7 +19569,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AvatarImg: {fileID: 183485211}
-  userId: uidgzpekbcwpo
+  userId: 
   AvatarSprite: {fileID: 0}
   UserName: 
   Email: 

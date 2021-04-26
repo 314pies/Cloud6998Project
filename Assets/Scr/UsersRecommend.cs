@@ -11,6 +11,8 @@ using UnityEngine.UI;
 
 public class UsersRecommend : MonoBehaviour
 {
+
+    public GameObject[] UserButtons;
     private async void OnEnable()
     {
         var reqPar = "q=" + UserProfile.UserID; // uid1";//+ userID;
@@ -28,8 +30,22 @@ public class UsersRecommend : MonoBehaviour
                 Debug.Log(body);
                 try
                 {
-                    var stuff = (JArray)JsonConvert.DeserializeObject(body);
-                    
+                    var _events = (JArray)JsonConvert.DeserializeObject(body);
+                    //List<string> _userDetailsList = ((JArray)_events).ToObject<List<string>>();
+                    var _index = 0;
+                    foreach (var _userDetails in _events)
+                    {
+                        Debug.Log("Recommend User: " +_userDetails["id"]);
+                        if (_index < UserButtons.Length)
+                        {
+                            UserButtons[_index].GetComponent<RecommendUserButton>().Load((string)_userDetails["id"]);
+                        }
+                        else
+                        {
+                            break;
+                        }
+                        _index++;
+                    }
                 }
                 catch (Exception exp)
                 {
