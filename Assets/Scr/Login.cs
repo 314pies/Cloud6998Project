@@ -32,7 +32,7 @@ public class Login : MonoBehaviour
 
     public void OnSigninWithGoogleClicked()
     {
-        Application.OpenURL("https://wefoodiestest1.auth.us-west-2.amazoncognito.com/login?client_id=buq36h698541nssg0b66oa638&response_type=code&scope=aws.cognito.signin.user.admin+email+openid+phone+profile&redirect_uri=https://www.google.com");
+        Application.OpenURL("https://wefoodiestest2.auth.us-west-2.amazoncognito.com/login?client_id=1dhvrvbcd6kfp3dp54h9j3kppi&response_type=code&scope=aws.cognito.signin.user.admin+email+openid+phone+profile&redirect_uri=https://www.google.com");
         StartCoroutine(WaitAndLoad());
     }
 }
