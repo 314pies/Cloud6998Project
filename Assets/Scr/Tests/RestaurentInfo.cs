@@ -1,23 +1,24 @@
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using System.Collections;
 using System.Collections.Generic;
-using System.Net.Http;
 using TMPro;
 using UnityEngine;
-
-
-public class RestaurentInfoTest : MonoBehaviour
+using System.Net.Http;
+using Michsky.UI.ModernUIPack;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
+using UnityEngine.UI;
+public class RestaurentInfo : MonoBehaviour
 {
     // Start is called before the first frame update
     async void Start()
     {
+        var reqPar = "BBQ"; // uid1";//+ userID;
         using (var httpClient = new HttpClient())
         {
-
-            //var reqPar = "numPeople=3&time=2021_4_9_12_15_30&restaurantId="+SelectedRestaurentID;
-            var reqPar = "eH0bypB-IqUH73IVgEEfPA";
+            Debug.Log(reqPar);
             using (var request = new HttpRequestMessage(new HttpMethod("GET"),
-                "https://ir5pgsnsfk.execute-api.us-west-2.amazonaws.com/v_0_0/searchbyrid?q=" + reqPar))
+            "https://ir5pgsnsfk.execute-api.us-west-2.amazonaws.com/v_0_0/search?zipcode=10027&q=" + reqPar))
             {
                 var response = await httpClient.SendAsync(request);
                 Debug.Log(response);
@@ -27,18 +28,16 @@ public class RestaurentInfoTest : MonoBehaviour
                 var stuff = (JArray)JsonConvert.DeserializeObject(body);
 
 
-                foreach(var a in stuff)
+                foreach (var a in stuff)
                 {
                     Debug.Log(a);
                 }
-
-                var restarName = stuff[0]["name"];
-                var image_url = stuff[0]["image_url"];
-                Debug.Log(restarName);
-                Debug.Log(image_url);                
             }
-
         }
     }
+    // Update is called once per frame
+    void Update()
+    {
 
+    }
 }

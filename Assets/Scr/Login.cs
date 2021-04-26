@@ -50,7 +50,7 @@ public class Login : MonoBehaviour
         //var newWindow = "window.open('https://wefoodiestest2.auth.us-west-2.amazoncognito.com/login?client_id=1dhvrvbcd6kfp3dp54h9j3kppi&response_type=code&scope=aws.cognito.signin.user.admin+email+openid+phone+profile&redirect_uri=https://www.google.com', 'Google')";
         Application.OpenURL("https://wefoodiestest2.auth.us-west-2.amazoncognito.com/login?client_id=1dhvrvbcd6kfp3dp54h9j3kppi&response_type=code&scope=aws.cognito.signin.user.admin+email+openid+phone+profile&redirect_uri=https://www.google.com");
         //Application.ExternalEval(newWindow); //newWindow.close();
-        StartCoroutine(Kill_IE());
+       // StartCoroutine(Kill_IE());
         StartCoroutine(WaitAndLoad());
     }
 }

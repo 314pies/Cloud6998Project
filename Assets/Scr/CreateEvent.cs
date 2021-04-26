@@ -19,30 +19,62 @@ public class CreateEvent : MonoBehaviour
 
     [SerializeField]
     CustomDropdown RestaurentSelector;
+    public Sprite RestaruentIcon;
 
-    Dictionary<int, string> UISelectedItemIDToRestaurentID = new Dictionary<int, string>() {
-        { 0,"zLNOCv3hmzPNO8pchYdBpw"},
-        { 1,"wzmeaMTm5cZ1JCjep7iQeA"},
-        { 2,"wfhMIiMh2A2psCGONOVSlg"},
-        { 3,"t_kSGMHVWY5j-Tnrniwclw"},
-        {4, "NN3mOWF5e_pnR1ArqM2bHQ"} // OBAO
-    };
+    [SerializeField]
+    TMP_InputField restaurentSearch;
 
-    public string SelectedRestaurentID
+    /// <summary>
+    /// Called from restaurentSearch
+    /// </summary>
+    /// <param name="v"></param>
+    public async void OnEndEditCalled(string v)
     {
-        get
-        {
-            if (UISelectedItemIDToRestaurentID.ContainsKey(RestaurentSelector.selectedItemIndex))
-                return UISelectedItemIDToRestaurentID[RestaurentSelector.selectedItemIndex];
+        Debug.Log(restaurentSearch.text);
 
-            Debug.LogError("CreateEvent.SelectedRestaurentID() selectedItemIndex not found");
-            return "rid1";
+        Loading.ShowLoading("Searching For Restaurant...");
+        using (var httpClient = new HttpClient())
+        {
+            var reqPar = restaurentSearch.text;
+            Debug.Log(reqPar);
+            using (var request = new HttpRequestMessage(new HttpMethod("GET"),
+            "https://ir5pgsnsfk.execute-api.us-west-2.amazonaws.com/v_0_0/search?zipcode=10027&q=" + reqPar))
+            {
+                var response = await httpClient.SendAsync(request);
+                Debug.Log(response);
+                string body = await response.Content.ReadAsStringAsync();
+                Debug.Log(body);
+                Loading.CloseLoading();
+                var stuff = (JArray)JsonConvert.DeserializeObject(body);
+
+                RestaurentNameToID.Clear();
+                var _newDropDownList = new List<CustomDropdown.Item>();
+                foreach (var _rInfo in stuff)
+                {
+                    Debug.Log(_rInfo["name"] + ", " + _rInfo["id"]);
+                    if (!RestaurentNameToID.ContainsKey((string)_rInfo["name"]))
+                    {
+                        RestaurentNameToID.Add((string)_rInfo["name"], (string)_rInfo["id"]);
+                    }
+                    _newDropDownList.Add(new CustomDropdown.Item() { itemIcon = RestaruentIcon, itemName = (string)_rInfo["name"] });
+                }
+
+                RestaurentSelector.dropdownItems = _newDropDownList;
+                RestaurentSelector.SetupDropdown();
+            }
         }
     }
 
+
+
+    Dictionary<string, string> RestaurentNameToID = new Dictionary<string, string>() { };
+
+
     public void OnDropdownSelected(int itemID)
     {
+        Debug.Log(RestaurentSelector.selectedText.text);
         Debug.Log(RestaurentSelector.selectedItemIndex);
+       
     }
 
     public EventDetails eventDetails;
@@ -50,6 +82,16 @@ public class CreateEvent : MonoBehaviour
     {
         Debug.Log(WhenInput.text);
         Debug.Log(HowManyInput.text);
+        var _rName = RestaurentSelector.selectedText.text;
+        string SelectedRestaurentID="";
+        if (RestaurentNameToID.ContainsKey(_rName))
+            SelectedRestaurentID = RestaurentNameToID[_rName];
+        else
+        {
+            PopupManager.OpenPopup("", "Please pick a restaurant");
+            return;
+        }
+
         Debug.Log(SelectedRestaurentID);
 
         using (var httpClient = new HttpClient())
@@ -80,7 +122,7 @@ public class CreateEvent : MonoBehaviour
                     PopupManager.OpenPopup("Sth Go Wrong", body);
                 }
             }
-            
+
         }
     }
 }
