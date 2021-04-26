@@ -121,8 +121,8 @@ public class RecommendUserButton : MonoBehaviour
     {
         otherUsersDetailsPage.Name.text = UserName;
         otherUsersDetailsPage.AvatarImg.sprite = AvatarSprite;
-        otherUsersDetailsPage.Email.text = Email;
-        otherUsersDetailsPage.Gender.text = Gender;
+        otherUsersDetailsPage.Email.text = "Email: " + Email;
+        otherUsersDetailsPage.Gender.text = "Gender: " + Gender;
         otherUsersDetailsPage.EventsJoined = EventIDList;
         otherUsersDetailsPage.gameObject.SetActive(true);
     }
