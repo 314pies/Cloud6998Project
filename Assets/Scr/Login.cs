@@ -28,4 +28,11 @@ public class Login : MonoBehaviour
        
         Debug.Log("Login Success, UserID: " + UserProfile.UserID);
     }
+
+
+    public void OnSigninWithGoogleClicked()
+    {
+        Application.OpenURL("https://wefoodiestest1.auth.us-west-2.amazoncognito.com/login?client_id=buq36h698541nssg0b66oa638&response_type=code&scope=aws.cognito.signin.user.admin+email+openid+phone+profile&redirect_uri=https://www.google.com");
+        StartCoroutine(WaitAndLoad());
+    }
 }
