@@ -37,7 +37,6 @@ public class RecommendUserButton : MonoBehaviour
         Debug.Log(reqPar);
         using (var httpClient = new HttpClient())
         {
-            Loading.ShowLoading("Loading User Profile...");
             Debug.Log(reqPar);
             using (var request = new HttpRequestMessage(new HttpMethod("GET"),
             "https://omx6f7pb2f.execute-api.us-west-2.amazonaws.com/user_v1/detail?" + reqPar))
