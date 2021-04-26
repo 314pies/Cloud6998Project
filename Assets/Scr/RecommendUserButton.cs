@@ -15,8 +15,12 @@ public class RecommendUserButton : MonoBehaviour
     public Image AvatarImg;
     public string userId;
 
+
     // Data Cached
-    string UserName, Email, Gender;
+    [Header("Details Info Cahces")]
+    public Sprite AvatarSprite;
+    public string UserName, Email, Gender;
+    public List<string> EventIDList = new List<string>();
     //
 
     public void OnEnable()
@@ -78,6 +82,18 @@ public class RecommendUserButton : MonoBehaviour
                     }
                     else { Gender = "Unknown"; }
 
+                    
+
+                    
+
+                    var _events = stuff.GetValue("events");
+
+                    if (_events != null)
+                    {
+                        List<string> _eventIdList = ((JArray)_events).ToObject<List<string>>();
+                        EventIDList = _eventIdList;
+                    }
+
                     var _picture = stuff.GetValue("picture");
                     if (_picture != null)
                     {
@@ -96,6 +112,18 @@ public class RecommendUserButton : MonoBehaviour
     {
         WWW www = new WWW(url);
         yield return www;
-        img.sprite = Sprite.Create(www.texture, new Rect(0, 0, www.texture.width, www.texture.height), new Vector2(0, 0));
+        AvatarSprite = Sprite.Create(www.texture, new Rect(0, 0, www.texture.width, www.texture.height), new Vector2(0, 0));
+        img.sprite = AvatarSprite;
+    }
+    [Header("UI Transform")]
+    public OtherUsersDetails otherUsersDetailsPage;
+    public void OnBeingClicked()
+    {
+        otherUsersDetailsPage.Name.text = UserName;
+        otherUsersDetailsPage.AvatarImg.sprite = AvatarSprite;
+        otherUsersDetailsPage.Email.text = Email;
+        otherUsersDetailsPage.Gender.text = Gender;
+        otherUsersDetailsPage.EventsJoined = EventIDList;
+        otherUsersDetailsPage.gameObject.SetActive(true);
     }
 }

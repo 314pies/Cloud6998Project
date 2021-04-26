@@ -66,7 +66,14 @@ public class UserProfile : MonoBehaviour
                         GenderInput.text = gender_str;
                     }
                     else { GenderInput.text = "Unknown"; }
-                    
+
+                    var _events = stuff.GetValue("events");
+
+                    if (_events != null)
+                    {
+
+                    }
+
                     var _picture = stuff.GetValue("picture");
                     if (_picture != null)
                     {
